@@ -4,6 +4,8 @@ const music = document.getElementById("track");
 const audio = document.getElementById("audioButton")
 const audioButton = document.getElementById("audioImage")
 
+document.addEventListener('click', playMusic, { once: true });
+
 window.onload = function() {
     startGame();
 
