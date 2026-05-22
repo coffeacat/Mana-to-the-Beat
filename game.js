@@ -28,37 +28,37 @@ let candies = [
     {
 	    type: "1",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_extras/Peachy_Peach_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_extras/Peachy_Peach_PMTTYDNS_icon.png"
 	},{
 		type: "2",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_2/Jammin_Jelly_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_2/Jammin_Jelly_PMTTYDNS_icon.png"
 	},{
 		type: "3",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_3/Turtley_Leaf_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_3/Turtley_Leaf_PMTTYDNS_icon.png"
 	},{
 		type: "4",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_4/Fire_Flower_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_4/Fire_Flower_PMTTYDNS_icon.png"
 	},{
 	    type: "5",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_5/Ice_Storm_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_5/Ice_Storm_PMTTYDNS_icon.png"
 	},{
 		type: "6",
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
-		sprite: "../public/images/candy_6/Sleepy_Sheep_PMTTYDNS_icon.png"
+		sprite: "./public/images/candy_6/Sleepy_Sheep_PMTTYDNS_icon.png"
 	}
 ];
 
 let blankTile = {
 	type: "7",
 	variant: "blank", // horizontal 4, vertical 4, bomb, full clear
-	sprite: "../public/images/blank.png"
+	sprite: "./public/images/blank.png"
 };
 
-let sfx = new Audio("../public/audio/Explosion.wav");
+let sfx = new Audio("./public/audio/Explosion.wav");
 
 // create some variables
 var board = [];
@@ -285,11 +285,11 @@ function playMusic() {
 
     if (isPlaying) {
         console.log("mute");
-        audioButton.src = "../public/images/SpeakerMute.png";
+        audioButton.src = "./public/images/SpeakerMute.png";
         music.muted = true;
     } else {
         console.log("sound on");
-        audioButton.src = "../public/images/SpeakerOn.png";
+        audioButton.src = "./public/images/SpeakerOn.png";
         music.muted = false;
     }
 

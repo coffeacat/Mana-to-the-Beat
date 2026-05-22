@@ -1,5 +1,5 @@
 body {
-	background: url("../public/images/Hoohoo_Mountain_SkyView.png") no-repeat center fixed;
+	background: url("./public/images/Hoohoo_Mountain_SkyView.png") no-repeat center fixed;
 	background-size: cover;
 	background-color: pink;
 
@@ -39,7 +39,7 @@ body {
 	right: 10px;
 	margin: 10px; /* offset from position */
 	/* background-color: transparent; */
-	/* background-image: url("../public/images/SpeakerMute.png"); */
+	/* background-image: url("./public/images/SpeakerMute.png"); */
 	background-size: cover; /* ensures the image takes up the entire area */
 	padding: 5px 5px; /* size of the button essentially */
 	/* border: none; */
