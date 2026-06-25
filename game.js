@@ -60,7 +60,7 @@ function adapt() {
 
     let scale = winW / aspecW
     if (winH/aspecH<scale) scale=winH/aspecH
-    el.style.transform="scale("+scale+")"
+    el.style.transform="scale("+scale+")";
     if (winW<=aspecW)
         el.style.left=((winW-aspecW)/2).toFixed(2)+'px'
     else
@@ -353,8 +353,27 @@ function restartGame() {
     primeBoard();
 }
 
+function disableDrag() {
+    for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < columns; c++) {
+            board[r][c].draggable = false;
+        }
+    }
+}
+
+function enableDrag() {
+    for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < columns; c++) {
+            board[r][c].draggable = true;
+        }
+    }
+}
+
 // prime the board for gameplay
 function primeBoard() {
+    // prevents player from dragging candy while the board is being set up
+    disableDrag();
+
     clearInterval(candyInterval);
     clearInterval(boardInterval);
 
@@ -401,6 +420,7 @@ function clearBoard() {
 
         notClear = false;
         globalMatchCap = 5;
+        enableDrag();
 
         if (startGame) {
             gameGo();
@@ -606,6 +626,8 @@ function dragEnd() {
 
     // only swap adjacent candies
     if (isAdjacent) {
+        disableDrag();
+        
         let currTile = internalBoard[r1][c1];
         let otherTile = internalBoard[r2][c2];
 
@@ -714,6 +736,8 @@ function crushCandy() {
         combo = 0;
         matches = 0;
         comboBox.innerHTML = "x" + combo;
+
+        enableDrag();
     } else {
         matches++;
         if (!notClear) {
