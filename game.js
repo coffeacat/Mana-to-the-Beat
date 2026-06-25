@@ -78,30 +78,37 @@ class Tile {
     }
 }
 
+let candyType1 = "perfume";
+let candyType2 = "manatown";
+let candyType3 = "bow";
+let candyType4 = "clover";
+let candyType5 = "osmanthus";
+let candyType6 = "note";
+
 // create our candy types
 let candies = [
     {
-	    type: "perfume",
+	    type: candyType1,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/perfume.webp"
 	},{
-		type: "manatown",
+		type: candyType2,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/manatown.webp"
 	},{
-		type: "bow",
+		type: candyType3,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/bow.webp"
 	},{
-		type: "clover",
+		type: candyType4,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/clover.webp"
 	},{
-	    type: "osmanthus",
+	    type: candyType5,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/osmanthus.webp"
 	},{
-		type: "note",
+		type: candyType6,
 		variant: "normal", // horizontal 4, vertical 4, bomb, full clear
 		sprite: "./public/images/candy/note.webp"
 	}
@@ -116,76 +123,76 @@ let donutVariant = "full_clear";
 // create our special candies
 let special_candies = [
     {
-	    type: "perfume",
-		variant: "horizontal_4",
+	    type: candyType1,
+		variant: rowVariant,
 		sprite: "./public/images/candy/perfume_side_stripe.webp"
 	},{
-		type: "manatown",
-		variant: "horizontal_4",
+		type: candyType2,
+		variant: rowVariant,
 		sprite: "./public/images/candy/manatown_side_stripe.webp"
 	},{
-		type: "bow",
-		variant: "horizontal_4",
+		type: candyType3,
+		variant: rowVariant,
 		sprite: "./public/images/candy/bow_side_stripe.webp"
 	},{
-		type: "clover",
-		variant: "horizontal_4",
+		type: candyType4,
+		variant: rowVariant,
 		sprite: "./public/images/candy/clover_side_stripe.webp"
 	},{
-	    type: "osmanthus",
-		variant: "horizontal_4",
+	    type: candyType5,
+		variant: rowVariant,
 		sprite: "./public/images/candy/osmanthus_side_stripe.webp"
 	},{
-		type: "note",
-		variant: "horizontal_4",
+		type: candyType6,
+		variant: rowVariant,
 		sprite: "./public/images/candy/note_side_stripe.webp"
 	},{
-	    type: "perfume",
-		variant: "vertical_4",
+	    type: candyType1,
+		variant: colVariant,
 		sprite: "./public/images/candy/perfume_up_stripe.webp"
 	},{
-		type: "manatown",
-		variant: "vertical_4",
+		type: candyType2,
+		variant: colVariant,
 		sprite: "./public/images/candy/manatown_up_stripe.webp"
 	},{
-		type: "bow",
-		variant: "vertical_4",
+		type: candyType3,
+		variant: colVariant,
 		sprite: "./public/images/candy/bow_up_stripe.webp"
 	},{
-		type: "clover",
-		variant: "vertical_4",
+		type: candyType4,
+		variant: colVariant,
 		sprite: "./public/images/candy/clover_up_stripe.webp"
 	},{
-	    type: "osmanthus",
-		variant: "vertical_4",
+	    type: candyType5,
+		variant: colVariant,
 		sprite: "./public/images/candy/osmanthus_up_stripe.webp"
 	},{
-		type: "note",
-		variant: "vertical_4",
+		type: candyType6,
+		variant: colVariant,
 		sprite: "./public/images/candy/note_up_stripe.webp"
 	},{
-	    type: "perfume",
-		variant: "bomb",
+	    type: candyType1,
+		variant: bombVariant,
 		sprite: "./public/images/candy/perfume_candy.webp"
 	},{
-		type: "manatown",
-		variant: "bomb",
+		type: candyType2,
+		variant: bombVariant,
 		sprite: "./public/images/candy/manatown_candy.webp"
 	},{
-		type: "bow",
-		variant: "bomb",
+		type: candyType3,
+		variant: bombVariant,
 		sprite: "./public/images/candy/bow_candy.webp"
 	},{
-		type: "clover",
-		variant: "bomb",
+		type: candyType4,
+		variant: bombVariant,
 		sprite: "./public/images/candy/clover_candy.webp"
 	},{
-	    type: "osmanthus",
-		variant: "bomb",
+	    type: candyType5,
+		variant: bombVariant,
 		sprite: "./public/images/candy/osmanthus_candy.webp"
 	},{
-		type: "note",
-		variant: "bomb",
+		type: candyType6,
+		variant: bombVariant,
 		sprite: "./public/images/candy/note_candy.webp"
 	},{
         type: donutType,
@@ -281,6 +288,7 @@ var startGame = false;
 var playerAction = false;
 var boardModified = false;
 var matchedSpecial = false;
+var donutActivated = false;
 
 var currImage;
 var otherImage;
@@ -378,8 +386,8 @@ function primeBoard() {
     clearInterval(boardInterval);
 
     // scramble the board
-    scramble();
-    // scrambleCustom();
+    // scramble();
+    scrambleCustom();
 
     // player action is true initially to clear the board for matches
     playerAction = true;
@@ -411,7 +419,7 @@ function clearBoard() {
         window.setTimeout(clearBoard, 1000);
     // when it is clear of matches, the game starts
     } else {
-        // resets when to check for clearing candy (according to bgm)
+        // resets when to check for clearing candy (according to bpm)
         clearInterval(candyInterval);
         candyInterval = window.setInterval(function() {
 			checkCandy();
@@ -499,6 +507,17 @@ function scrambleCustom() {
         [ 1, 2, 3, 4, 0, 1, 2, 3, 4, 0 ],
         [ 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 ],
         [ 4, 0, 1, 2, 3, 4, 0, 1, 2, 3 ],
+        [ 3, 4, 0, 1, 2, 3, 4, 0, 1, 2 ],
+        [ 2, 3, 4, 0, 1, 2, 3, 4, 0, 1 ],
+        [ 1, 2, 3, 4, 0, 1, 2, 3, 4, 0 ],
+
+        [ 0, 1, 2, 3, 4, 0, 1, 4, 3, 4 ],
+        [ 4, 0, 1, 2, 3, 4, 0, 5, 4, 5 ],
+        [ 3, 4, 0, 5, 2, 3, 4, 0, 5, 5 ],
+        [ 2, 3, 5, 0, 5, 5, 3, 5, 0, 1 ],
+        [ 1, 2, 3, 5, 0, 1, 2, 3, 4, 5 ],
+        [ 0, 1, 2, 5, 4, 0, 1, 2, 3, 5 ],
+        [ 4, 0, 5, 2, 5, 4, 0, 1, 2, 3 ],
         [ 3, 4, 0, 1, 2, 3, 4, 0, 1, 2 ],
         [ 2, 3, 4, 0, 1, 2, 3, 4, 0, 1 ],
         [ 1, 2, 3, 4, 0, 1, 2, 3, 4, 0 ]
@@ -627,7 +646,7 @@ function dragEnd() {
     // only swap adjacent candies
     if (isAdjacent) {
         disableDrag();
-        
+
         let currTile = internalBoard[r1][c1];
         let otherTile = internalBoard[r2][c2];
 
@@ -659,7 +678,7 @@ function dragEnd() {
         // console.log("swapped image: " + otherImage.src);
 
         // check if move is valid (aka creates a match)
-        let isValid = checkValid();
+        let isValid = checkValid(currTile, otherTile);
         if (!isValid) {
             // if not, swaps the images back
             let temp = otherImage.src;
@@ -671,6 +690,7 @@ function dragEnd() {
             otherTile.variant = currTile.variant;
             currTile.type = temp.type;
             currTile.variant = temp.variant;
+            enableDrag();
         } else {
             playerAction = true;
         }
@@ -726,6 +746,15 @@ function crushCandy() {
     crushThree();
     // console.log("PA1: " + playerAction);
     // console.log("BM1: " + boardModified);
+    console.log("donut? " + donutActivated);
+    if (donutActivated) {
+        let combo = calculateCombo(activateDonut(false));
+        if (combo != 0) {
+            boardMechanics(combo);
+        }
+        donutActivated = false;
+    }
+
     if (!boardModified) {
         playerAction = false;
         matchedSpecial = false;
@@ -843,9 +872,9 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
                 let specialCandy;
 
                 if (horizontal) {
-                    specialCandy = findCandy(matchCandyTiles[0].type, "vertical_4", special_candies);
+                    specialCandy = findCandy(matchCandyTiles[0].type, colVariant, special_candies);
                 } else {
-                    specialCandy = findCandy(matchCandyTiles[0].type, "horizontal_4", special_candies);
+                    specialCandy = findCandy(matchCandyTiles[0].type, rowVariant, special_candies);
                 }
 
                 let isBomb = checkBomb(matchCandyTiles, matchCandyImages, horizontal);
@@ -853,7 +882,7 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
             
                 if (isBomb) {
                     // find appropriate bomb candy
-                    specialCandy = findCandy(matchCandyTiles[0].type, "bomb", special_candies);
+                    specialCandy = findCandy(matchCandyTiles[0].type, bombVariant, special_candies);
                     // console.log("bomb candy: " + specialCandy.type + " " + specialCandy.variant);
                 }
                             
@@ -883,7 +912,7 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
             
                 if (isBomb && !notClear) {
                     // find appropriate bomb candy
-                    let bomb = findCandy(matchCandyTiles[0].type, "bomb", special_candies);
+                    let bomb = findCandy(matchCandyTiles[0].type, bombVariant, special_candies);
                     // console.log("bomb candy: " + specialCandy.type + " " + specialCandy.variant);
 
                     // clear special tiles and images
@@ -906,20 +935,16 @@ function activateSpecialCandy(candy, random) {
 
     console.log("active: " + candy.type + ", " + variant);
 
-    if (variant == "horizontal_4" || variant == "vertical_4") {
+    if (variant == rowVariant || variant == colVariant) {
         clearArray = activateStripe(candy);
     }
     
-    if (variant == "bomb") {
+    if (variant == bombVariant) {
         clearArray = activateBomb(candy);
     }
 
     if (variant == donutVariant) {
-        candy.type = blankTile.type;
-        candy.variant = blankTile.variant;
-        board[candy.row][candy.column].src = blankTile.sprite;
-        clearArray.push(candy);
-        // combo =+ activateDonut(candy, random);
+        clearArray = activateDonut(random);
     }
 
     return clearArray;
@@ -932,7 +957,7 @@ function activateStripe(candy) {
     let specialArrays = [];
 
     // if the stripe is horizontal, clear a row
-    if (variant == "horizontal_4") {
+    if (variant == rowVariant) {
         let row = candy.row;
         for (let i = 0; i < columns; i++) {
             console.log("coordinates: (" + row + ", " + i + ")");
@@ -988,7 +1013,7 @@ function activateStripe(candy) {
         }
     }
 
-    // add this array to any special arrays
+    // add any special arrays to this stripe array
     transferArray(clearTiles, specialArrays);
 
     console.log("all stripe tiles");
@@ -1086,7 +1111,7 @@ function activateBomb(candy) {
         }
     }
 
-    // add this bomb array to any special arrays
+    // add any special arrays to this bomb array
     transferArray(clearTiles, specialArrays);
 
     console.log("all bomb tiles");
@@ -1098,13 +1123,19 @@ function activateBomb(candy) {
     return clearTiles;
 }
 
-function activateDonut(candy, random) {
+// random here is supposed to provide a case for the donut
+// to activate when it's destroyed by a special candy but
+// i might scrap it due to the lack of visual clarity
+function activateDonut(random) {
     let clearTiles = [];
     let specialArrays = [];
 
     let type;
+    let variant;
 
+    // if donut is player activated
     if (!random) {
+        // get the internal tiles of both swapped images
         let currCoords = currImage.id.split("-"); // id="0-0" -> ["0", "0"]
             let r1 = parseInt(currCoords[0]);
             let c1 = parseInt(currCoords[1]);
@@ -1116,14 +1147,152 @@ function activateDonut(candy, random) {
         let currTile = internalBoard[r1][c1];
         let otherTile = internalBoard[r2][c2];
 
+        // find out which image is the donut and which is the other candy
+        // if current tile is not the donut
         if (currTile.type != donutType) {
+            // sets the type to clear as the current tile type
             type = currTile.type;
+            variant = currTile.variant;
+            // delete the donut
+            clearTiles.push(otherTile);
         } else {
+            // otherwise sets the other tile as the type to clear
             type = otherTile.type;
+            variant = otherTile.variant;
+            // there is a chance that the other type is also a donut
+            // delete the donut
+            clearTiles.push(currTile);
         }
     } else {
-        type = randomize(candies).type;
+        let candyCount = [ 0, 0, 0, 0, 0, 0 ]
+
+        // finds the most prominent candy on the board
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                switch(internalBoard[r][c].type) {
+                    case candyType1:
+                        candyCount[0]++;
+                        break;
+                    case candyType2:
+                        candyCount[1]++;
+                        break;
+                    case candyType3:
+                        candyCount[2]++;
+                        break;
+                    case candyType4:
+                        candyCount[3]++;
+                        break;
+                    case candyType5:
+                        candyCount[4]++;
+                        break;
+                    case candyType6:
+                        candyCount[5]++;
+                        break;
+                    default:
+                        // do nothing
+                }
+            }
+        }
+
+        // finds the type that has the most candies on the board
+        let largest = 0;
+        for (let i = 0; i < candyCount.length; i++) {
+            if (candyCount[i] > largest) {
+                largest = candyCount[i];
+            }
+        }
+
+        // set type as the one to be cleared
+        let index = candyCount.indexOf(largest);
+        type = candies[index].type;
+        variant = candies[index].variant;
     }
+
+    // if the other tile is a donut
+    if (variant == donutVariant) {
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                // adds the entire board to clear
+                clearTiles.push(internalBoard[r][c]);
+            }
+        }
+    } else {
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                // adds tiles that are the same type to clear
+                if (internalBoard[r][c].type == type) {
+                    clearTiles.push(internalBoard[r][c]);
+                }
+            }
+        }
+    }
+
+    // what if donut somehow swaps with blank?
+    // assume that it's not?
+
+    // if the variant of the other candy is not normal
+    if (variant != donutVariant && variant != "normal" && variant != "blank") {
+        let variantCandies = [];        
+
+        // add the variant(s) to an array
+        if (variant == rowVariant || variant == colVariant) {
+            // stripes
+            variantCandies.push(findCandy(type, rowVariant, special_candies));
+            variantCandies.push(findCandy(type, colVariant, special_candies));
+        } else {
+            // bomb
+            variantCandies.push(findCandy(type, bombVariant, special_candies));
+        }
+
+        // then replace all the candies with a variant of the candy
+        for (let i = 0; i < clearTiles.length; i++) {
+            let specialCandy = randomize(variantCandies);
+            let row = clearTiles[i].row;
+            let column = clearTiles[i].column;
+
+            clearTiles[i].variant = specialCandy.variant;
+            board[row][column].src = specialCandy.sprite;
+        }
+    }
+
+    // then clear the array
+    for (let i = 0; i < clearTiles.length; i++) {
+        let curr = clearTiles[i];
+        let currRow = curr.row;
+        let currCol = curr.column;
+
+        // if stripe or bomb, activate it
+        if (curr.variant != donutVariant && curr.variant != "normal" && curr.variant != "blank") {
+            let specialArray = activateSpecialCandy(internalBoard[currRow][currCol], true);
+            transferArray(specialArrays, specialArray);
+        // otherwise, clear normally
+        } else {
+            // there shouldn't be any donut variants other than the one
+            // activated and if the whole screen is cleared
+            curr.type = blankTile.type;
+            curr.variant = blankTile.variant;
+            board[currRow][currCol].src = blankTile.sprite;
+        }
+    }
+    
+    /* for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns; c++) {
+                // clear all type
+                //if ( == type)
+                // if special candy activate it
+            }
+        } */
+
+    // add any special arrays to the clear tiles
+    transferArray(clearTiles, specialArrays);
+
+    console.log("all bomb tiles");
+    for (let k = 0; k < clearTiles.length; k++) {
+        console.log("coords: (" + clearTiles[k].row + ", " + clearTiles[k].column +
+        "); type: " + clearTiles[k].type + "; variant: " + clearTiles[k].variant);
+    }
+
+    
 
     // remove donut
 
@@ -1756,7 +1925,12 @@ function clearTilesSpecial(tiles, images, specialCandy) {
     return clear;
 }
 
-function checkValid() {
+function checkValid(currTile, otherTile) {
+
+    if (currTile.type == donutType || otherTile.type == donutType) {
+        donutActivated = true;
+        return true;
+    }
 
     // check rows
     for (let r = 0; r < rows; r++) {
@@ -1837,7 +2011,7 @@ function generateCandy() {
         // if top tile of any column is empty
         if (board[0][c].src.includes(blankTile.sprite.substring(2))) {
             // generates new candy
-            let newCandy = randomize(candies);
+            let newCandy = candies[5];// randomize(candies);
             let matchCandyIndex;
             for (let i = 0; i < candies.length; i++) {
                 if (newCandy.type == candies[i].type) {
