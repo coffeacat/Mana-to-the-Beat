@@ -1910,20 +1910,20 @@ let menuVisable = false;
 // opens the sound menu
 function openMenu() {
     if (!menuVisable) {
-        menuOverlay.style.width = "100%";
         menuVisable = true;
         menu.style.opacity = "1";
         menu.style.transform = "translate(-50%, -50%)";
+        menuOverlay.style.width = "100%";
     } else {
         closeMenu();
     }
 }
 
 function closeMenu() {
-    menuOverlay.style.width = "0%";
     menuVisable = false;
     menu.style.opacity = "0";
     menu.style.transform = "translate(-50%, 200%)";
+    menuOverlay.style.width = "0%";
 }
 
 bgmSlider.addEventListener("input", bgmVolume);
