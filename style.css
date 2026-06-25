@@ -219,6 +219,7 @@ p {
 
 .slider input::-moz-range-thumb {
 	appearance: none;
+	-moz-appearance: none;
 	width: 40px;
 	height: 40px;
 	background-color: white;
@@ -260,7 +261,7 @@ p {
 }
 
 .slider progress::-moz-progress-bar {
-	background-color: #e91e63;
+	background-color: orange;
 }
 
 .sliderValue {
