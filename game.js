@@ -406,7 +406,7 @@ function primeBoard() {
 	boardInterval = window.setInterval(function() {
 		dropCandy();
 		generateCandy();
-	}, 50 // every 100ms, will "drop" candy over blank tiles and replace with new candy
+	}, 25 // every 50ms, will "drop" candy over blank tiles and replace with new candy
 	)
 
     clearBoard();
@@ -738,6 +738,7 @@ function findCandy(type, variant, array) {
 }
 
 function checkCandy() {
+    comboBox.innerHTML = "x" + combo;
     if (playerAction) {
         crushCandy();
         console.log("CRUSHED!");
@@ -775,7 +776,6 @@ function crushCandy() {
         tempScore = 0;
         combo = 0;
         matches = 0;
-        comboBox.innerHTML = "x" + combo;
 
         enableDrag();
     } else {
