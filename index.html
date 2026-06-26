@@ -30,7 +30,10 @@
 				
 				<button id="settingsButton">
 				</button>
+				<!--<button id="infoButton">
+				</button>-->
 
+				<div id="menuOverlay" class="overlay prevent-select"></div>
 				<div id="menu" class="prevent-select">
 					<svg id="menuExit" onclick="closeMenu()">
 						<image class="svgImage" href="./public/images/ui/cross.svg" />
@@ -42,8 +45,8 @@
 							<image id="bgmSpeaker" class="svgImage" href="./public/images/ui/volume.svg" />
 						</svg>
 						<div class="slider">
-							<input id="bgmInput" type="range" min="0" max="100" value="100">
-							<progress id="bgmBar" min="0" max="100" value="100"></progress>
+							<input id="bgmInput" type="range" min="0" max="100" value="50">
+							<progress id="bgmBar" min="0" max="100" value="50"></progress>
 						</div>
 						<div id="bgmValue" class="sliderValue prevent-select">100</div>
 					</div>
@@ -70,7 +73,18 @@
 						<div id="voiceValue" class="sliderValue prevent-select">100</div>
 					</div>-->
 				</div>
-				<div id="menuOverlay" class="overlay prevent-select"></div>
+
+				<!--<div id="infoOverlay" class="overlayClear prevent-select"></div>
+				<div id="infoBackground" class="prevent-select">
+					<div id="infoCard" class="prevent-select">
+						<div class="infoContainer">
+							<div class="infoSegment">
+								<image class="candyImage prevent-select" href="./public/images/candy/manatown_side_stripe.webp" />
+								<p class="prevent-select">Striped candies are formed by matching 4 in a row! When used in a match, they'll clear the row or column they're on depending on the direction of the stripes!</p>
+							</div>
+						</div>
+					</div>
+				</div> -->
 				
 				<div id="countdownContainer" class="overlay prevent-select">
 					<p id="countdownLabel" class="overlayLabel">

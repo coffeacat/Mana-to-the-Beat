@@ -5,7 +5,10 @@ const scoreBox = document.getElementById("score");
 const comboBox = document.getElementById("combo");
 
 const settings = document.getElementById("settingsButton");
+const infoButton = document.getElementById("infoButton");
 const menu = document.getElementById("menu");
+const info = document.getElementById("infoCard");
+const infoOverlay = document.getElementById("infoOverlay");
 const menuOverlay = document.getElementById("menuOverlay");
 const bgmSlider = document.getElementById("bgmInput");
 const bgmBar = document.getElementById("bgmBar");
@@ -202,17 +205,6 @@ let blankTile = {
 	sprite: "./public/images/candy/blank.webp"
 };
 
-// store the bgm
-let bgm = new Audio("./public/audio/とことこきっず.mp3");
-bgm.autoplay = true;
-bgm.loop = true;
-
-document.addEventListener('click', playMusic, { once: true });
-
-function playMusic() {
-    bgm.play();
-}
-
 let startGameSfx = new Audio("./public/audio/システム決定音_3.mp3");
 let crushSfx = new Audio("./public/audio/ぷにょん.mp3");
 
@@ -301,6 +293,23 @@ var candyInterval;
 // var boardInterval;
 var setTimer;
 var bpm = 136;
+
+let bgmSavedVolume = 50;
+let sfxSavedVolume = 100;
+let voiceSavedVolume = 100;
+
+// store the bgm
+let bgm = new Audio("./public/audio/とことこきっず.mp3");
+bgm.autoplay = true;
+bgm.loop = true;
+bgmVolume();
+bgm.play();
+
+document.addEventListener('click', playMusic, { once: true });
+
+function playMusic() {
+    bgm.play();
+}
 
 var prevLine = null;
 
@@ -2282,13 +2291,31 @@ function closeMenu() {
     menuOverlay.style.width = "0%";
 }
 
+infoButton.addEventListener("click", openInfo);
+let infoVisable = false;
+
+// opens the info card
+function openInfo() {
+    if (!infoVisable) {
+        infoVisable = true;
+        info.style.opacity = "1";
+        info.style.transform = "translate(-50%, 200%)";
+        infoOverlay.style.width = "100%";
+    } else {
+        closeInfo();
+    }
+}
+
+function closeInfo() {
+    infoVisable = false;
+    info.style.opacity = "0";
+    info.style.transform = "translate(-50%, 200%)";
+    infoOverlay.style.width = "0%";
+}
+
 bgmSlider.addEventListener("input", bgmVolume);
 sfxSlider.addEventListener("input", sfxVolume);
 // voiceSlider.addEventListener("input", voiceVolume);
-
-let bgmSavedVolume = 100;
-let sfxSavedVolume = 100;
-let voiceSavedVolume = 100;
 
 function bgmVolume() {
     volumeControl(bgmSlider, bgmBar, bgmValue, bgmSpeaker);
