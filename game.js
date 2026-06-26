@@ -4,7 +4,7 @@ const finalScoreBox = document.getElementById("finalScoreMessage");
 const scoreBox = document.getElementById("score");
 const comboBox = document.getElementById("combo");
 
-// const music = document.getElementById("track");
+// const music = document.getElementById("bgm");
 const settings = document.getElementById("settingsButton");
 const menu = document.getElementById("menu");
 const menuOverlay = document.getElementById("menuOverlay");
@@ -27,7 +27,6 @@ const countdownOverlay = document.getElementById("countdownContainer");
 const countdownTimer = document.getElementById("countdownLabel");
 const OKButton = document.getElementById("OKButton");
 
-// document.addEventListener('click', playMusic, { once: true });
 let aspecW = 1920;
 let aspecH = 1080;
 
@@ -206,9 +205,14 @@ let blankTile = {
 
 // store the bgm
 let bgm = new Audio("./public/audio/とことこきっず.mp3");
-bgm.play();
 bgm.autoplay = true;
 bgm.loop = true;
+
+document.addEventListener('click', playMusic, { once: true });
+
+function playMusic() {
+    bgm.play();
+}
 
 let startGameSfx = new Audio("./public/audio/システム決定音_3.mp3");
 let crushSfx = new Audio("./public/audio/ぷにょん.mp3");
