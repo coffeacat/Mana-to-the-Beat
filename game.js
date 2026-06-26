@@ -4,7 +4,6 @@ const finalScoreBox = document.getElementById("finalScoreMessage");
 const scoreBox = document.getElementById("score");
 const comboBox = document.getElementById("combo");
 
-// const music = document.getElementById("bgm");
 const settings = document.getElementById("settingsButton");
 const menu = document.getElementById("menu");
 const menuOverlay = document.getElementById("menuOverlay");
