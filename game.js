@@ -746,11 +746,11 @@ function checkCandy() {
     comboBox.innerHTML = "x" + combo;
     if (playerAction) {
         crushCandy();
-        console.log("CRUSHED!");
+        // console.log("CRUSHED!");
     } else {
         enableDrag();
     }
-    console.log("check candy");
+    // console.log("check candy");
 }
 
 function crushCandy() {
@@ -882,7 +882,7 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
             && matchCandyTiles[0].type != "temp") {
             let ignore = isMatchGreater(matchCandyTiles, horizontal);
             
-            console.log("ignore the 4 match? " + ignore);
+            // console.log("ignore the 4 match? " + ignore);
 
             if (!ignore) {
                 let specialCandy;
@@ -894,7 +894,7 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
                 }
 
                 let isBomb = checkBomb(matchCandyTiles, matchCandyImages, horizontal);
-                console.log("is4Bomb? " + isBomb);
+                // console.log("is4Bomb? " + isBomb);
             
                 if (isBomb) {
                     // find appropriate bomb candy
@@ -920,18 +920,18 @@ function matchMechanics(matchCandyTiles, matchCandyImages, matchFound, matchAmou
                 ignore = false;
             }
 
-            console.log("ignore the match? " + ignore);
+            // console.log("ignore the match? " + ignore);
 
             // if it's a match 4 or 5, ignore it
             if (!ignore) {
                 let isBomb = checkBomb(matchCandyTiles, matchCandyImages, horizontal);
-                console.log("isBomb? " + isBomb);
+                // console.log("isBomb? " + isBomb);
             
                 if (isBomb && !notClear) {
                     // find appropriate bomb candy
-                    console.log("bomb candy type: " + matchCandyTiles[0].type);
+                    // console.log("bomb candy type: " + matchCandyTiles[0].type);
                     let bomb = findCandy(matchCandyTiles[0].type, bombVariant, special_candies);
-                    console.log("bomb candy: " + bomb.type + " " + bomb.variant);
+                    // console.log("bomb candy: " + bomb.type + " " + bomb.variant);
 
                     // clear special tiles and images
                     comboArray = clearTilesSpecial(matchCandyTiles, matchCandyImages, bomb);
@@ -951,7 +951,7 @@ function activateSpecialCandy(candy, random) {
     let variant = candy.variant;
     let clearArray = [];
 
-    console.log("active: " + candy.type + ", " + variant);
+    // console.log("active: " + candy.type + ", " + variant);
 
     if (variant == rowVariant || variant == colVariant) {
         clearArray = activateStripe(candy);
@@ -969,7 +969,7 @@ function activateSpecialCandy(candy, random) {
 }
 
 function activateStripe(candy) {
-    console.log("activated stripe");
+    // console.log("activated stripe");
     let variant = candy.variant;
     let clearTiles = [];
     let specialArrays = [];
@@ -978,7 +978,7 @@ function activateStripe(candy) {
     if (variant == rowVariant) {
         let row = candy.row;
         for (let i = 0; i < columns; i++) {
-            console.log("coordinates: (" + row + ", " + i + ")");
+            // console.log("coordinates: (" + row + ", " + i + ")");
             // if the tile to clear is the special candy
             if (candy == internalBoard[row][i]) {
                 clearTiles.push(internalBoard[row][i]);
@@ -995,7 +995,7 @@ function activateStripe(candy) {
             // if the tile to clear is ANOTHER special candy
             } else if (internalBoard[row][i].variant != "normal" && 
                        internalBoard[row][i].variant != "blank") {
-                console.log("activated special candy");
+                // console.log("activated special candy");
                     // activates the special candy and returns with another array
                     // with candies that special candy has cleared
                     let specialArray = activateSpecialCandy(internalBoard[row][i], true);
@@ -1004,9 +1004,9 @@ function activateStripe(candy) {
                 //}, animationTime)
             // otherwise clears the tile if it's not already cleared
             } else {
-                console.log("activated r else");
+                // console.log("activated r else");
                 if (internalBoard[row][i].type != "blank") {
-                    console.log("not blank");
+                    // console.log("not blank");
                     clearTiles.push(internalBoard[row][i]);
                     // internalBoard[row][i].type = "temp";
                     animateCrush(board[row][i]);
@@ -1024,7 +1024,7 @@ function activateStripe(candy) {
     } else {
         let column = candy.column;
         for (let i = 0; i < rows; i++) {
-            console.log("coordinates: (" + i + ", " + column + ")");
+            // console.log("coordinates: (" + i + ", " + column + ")");
             if (candy == internalBoard[i][column]) {
                 clearTiles.push(internalBoard[i][column]);
                 animateCrush(board[i][column]);
@@ -1039,13 +1039,13 @@ function activateStripe(candy) {
                 }, animationTime)
             } else if (internalBoard[i][column].variant != "normal" &&
                        internalBoard[i][column].variant != "blank") {
-                    console.log("activated special candy");
+                    // console.log("activated special candy");
                     let specialArray = activateSpecialCandy(internalBoard[i][column], true);
                 //window.setTimeout(function() {
                     transferArray(specialArrays, specialArray);
                 //}, animationTime)
             } else {
-                console.log("activated c else");
+                // console.log("activated c else");
                 if (internalBoard[i][column].type != "blank") {
                     clearTiles.push(internalBoard[i][column]);
                     // internalBoard[i][column].type = "temp";
@@ -1066,11 +1066,11 @@ function activateStripe(candy) {
     // add any special arrays to this stripe array
     transferArray(clearTiles, specialArrays);
 
-    console.log("all stripe tiles");
+    /* console.log("all stripe tiles");
     for (let k = 0; k < clearTiles.length; k++) {
         console.log("coords: (" + clearTiles[k].row + ", " + clearTiles[k].column +
         "); type: " + clearTiles[k].type + "; variant: " + clearTiles[k].variant);
-    }
+    } */ 
 
     return clearTiles;
 }
@@ -1131,17 +1131,17 @@ function activateBomb(candy) {
     }
 
     // for the tiles that were added
-    console.log("bomb clear tiles");
+    // console.log("bomb clear tiles");
     for (let i = 0; i < clearTiles.length; i++) {
         let curr = clearTiles[i];
         let currRow = curr.row;
         let currCol = curr.column;
 
-        console.log("tile "+ i + ": (" + currRow + ", " + currCol + ")");
+        // console.log("tile "+ i + ": (" + currRow + ", " + currCol + ")");
         
         // if it's the bomb, clear it
         if (curr == candy) {
-            console.log("go off");
+            // console.log("go off");
             animateCrush(board[currRow][currCol]);
             // internalBoard[currRow][currCol].type = "temp";
             internalBoard[currRow][currCol].variant = blankTile.variant;
@@ -1155,7 +1155,7 @@ function activateBomb(candy) {
         // if it's a special candy activate it
         } else if (internalBoard[currRow][currCol].variant != "normal" &&
                    internalBoard[currRow][currCol].variant != "blank") {
-                console.log("activate special candy");
+                // console.log("activate special candy");
                 let specialArray = activateSpecialCandy(internalBoard[currRow][currCol], true);
             //window.setTimeout(function() {
                 transferArray(specialArrays, specialArray);
@@ -1180,11 +1180,11 @@ function activateBomb(candy) {
     // add any special arrays to this bomb array
     transferArray(clearTiles, specialArrays);
 
-    console.log("all bomb tiles");
+    /* console.log("all bomb tiles");
     for (let k = 0; k < clearTiles.length; k++) {
         console.log("coords: (" + clearTiles[k].row + ", " + clearTiles[k].column +
         "); type: " + clearTiles[k].type + "; variant: " + clearTiles[k].variant);
-    }
+    }*/
 
     return clearTiles;
 }
@@ -1277,7 +1277,7 @@ function activateDonut(candy, random) {
         clearTiles.push(candy);
     }
 
-    console.log("selected donut type: " + type)
+    // console.log("selected donut type: " + type)
 
     // if the other tile is a donut
     if (variant == donutVariant) {
@@ -1326,7 +1326,7 @@ function activateDonut(candy, random) {
         }
     }
 
-    console.log("selected donut variant: " + variant);
+    // console.log("selected donut variant: " + variant);
 
     // then clear the array
     for (let i = 0; i < clearTiles.length; i++) {
@@ -1334,7 +1334,7 @@ function activateDonut(candy, random) {
         let currRow = curr.row;
         let currCol = curr.column;
 
-        console.log("clear coords: (" + currRow + ", " + currCol + ")")
+        // console.log("clear coords: (" + currRow + ", " + currCol + ")")
 
         // if stripe or bomb, activate it
         if (curr.variant != donutVariant && curr.variant != "normal" && curr.variant != "blank") {
@@ -1362,11 +1362,11 @@ function activateDonut(candy, random) {
     // add any special arrays to the clear tiles
     transferArray(clearTiles, specialArrays);
 
-    console.log("all donut tiles");
+    /* console.log("all donut tiles");
     for (let k = 0; k < clearTiles.length; k++) {
         console.log("coords: (" + clearTiles[k].row + ", " + clearTiles[k].column +
         "); type: " + clearTiles[k].type + "; variant: " + clearTiles[k].variant);
-    }
+    }*/
 
     // add this array to any special arrays
     transferArray(clearTiles, specialArrays);
@@ -1406,11 +1406,11 @@ function calculateCombo(matchArray) {
         }
     }
 
-    console.log("all combo tiles - after " + combo);
+    /*console.log("all combo tiles - after " + combo);
     for (let k = 0; k < comboTiles.length; k++) {
         console.log("coords: (" + comboTiles[k].row + ", " + comboTiles[k].column +
             "); type: " + comboTiles[k].type + "; variant: " + comboTiles[k].variant);
-    }
+    }*/
     
     // however many nonoverlapping tiles there are (aka comboTiles) is the combo
     return comboTiles.length;
@@ -1453,7 +1453,7 @@ function isMatchGreater(matchArray, horizontal) {
                 // if the candy left is the same type as the match
                 if (checkCandy.type == firstCandy.type) {
                     // ignore clearing it
-                    console.log("IGNORE TRIGGERED 1");
+                    // console.log("IGNORE TRIGGERED 1");
                     ignore = true;
                 }
             }
@@ -1469,7 +1469,7 @@ function isMatchGreater(matchArray, horizontal) {
                 // if the candy right is the same type as the match
                 if (checkCandy.type == lastCandy.type) {
                     // ignore clearing it
-                    console.log("IGNORE TRIGGERED 2");
+                    // console.log("IGNORE TRIGGERED 2");
                     ignore = true;
                 }
             }
@@ -1515,7 +1515,7 @@ function isMatchGreater(matchArray, horizontal) {
                 // if the candy up is the same type as the match
                 if (checkCandy.type == firstCandy.type) {
                     // ignore clearing it
-                    console.log("IGNORE TRIGGERED 3");
+                    // console.log("IGNORE TRIGGERED 3");
                     ignore = true;
                 }
             }
@@ -1530,7 +1530,7 @@ function isMatchGreater(matchArray, horizontal) {
                 // if the candy down is the same type as the match
                 if (checkCandy.type == lastCandy.type) {
                     // ignore clearing it
-                    console.log("IGNORE TRIGGERED 4");
+                    // console.log("IGNORE TRIGGERED 4");
                     ignore = true;
                 }
             }
@@ -1552,8 +1552,8 @@ function checkBomb(matchTiles, matchImages, horizontal) {
 
     // horizontal case
     if (horizontal) {
-        console.log("ROW MATCH DETECTED");
-        console.log("CHECKING FOR INTERSECTING COLUMNS");
+        // console.log("ROW MATCH DETECTED");
+        // console.log("CHECKING FOR INTERSECTING COLUMNS");
 
         // checks for L formations
         // for each tile in the found match
@@ -1636,8 +1636,8 @@ function checkBomb(matchTiles, matchImages, horizontal) {
         }
     // vertical case
     } else {
-        console.log("COLUMN MATCH DETECTED");
-        console.log("CHECKING FOR INTERSECTING ROWS");
+        // console.log("COLUMN MATCH DETECTED");
+        // console.log("CHECKING FOR INTERSECTING ROWS");
         
         // checks for L formations
         // for each tile in the found match
@@ -1745,7 +1745,7 @@ function findMatchFive(checkTile, horizontal) {
             // if there is a match
             if (matchFound && matchCandyTiles.includes(checkTile)) {
                 matchFive = matchFound;
-                console.log("MATCH R FOUND!!!!!");
+                // console.log("MATCH R FOUND!!!!!");
                 break;
             }
         }
@@ -1769,13 +1769,13 @@ function findMatchFive(checkTile, horizontal) {
             // if there is a match
             if (matchFound && matchCandyTiles.includes(checkTile)) {
                 matchFive = matchFound;
-                console.log("MATCH C FOUND!!!!!");
+                // console.log("MATCH C FOUND!!!!!");
                 break;
             }
         }
     }
 
-    console.log("found match 5? " + matchFive);
+    // console.log("found match 5? " + matchFive);
 
     return matchFive;
 }
@@ -1798,7 +1798,7 @@ function checkBombMechanics(checkTile, checkCandies, matchTiles, matchImages) {
             checkCandies[i+1].type == checkTile.type) {
             
             // adds the tiles to the match array
-            console.log("BOMB DETECTED");
+            // console.log("BOMB DETECTED");
             isBomb = true;
             matchTiles.push(checkCandies[i]);
             matchTiles.push(checkCandies[i+1]);
@@ -1931,9 +1931,9 @@ function clearTiles(tiles, images) {
     // clearImages(images);
 
     let clear = [];
-    console.log("regular clear activated");
+    // console.log("regular clear activated");
     for (let i = 0; i < tiles.length; i++) {
-        console.log("tiles1: " + tiles[i].type + ", " + tiles[i].variant);
+        // console.log("tiles1: " + tiles[i].type + ", " + tiles[i].variant);
         if (tiles[i].variant != "normal" &&
             tiles[i].variant != "blank") {
             transferArray(clear, activateSpecialCandy(tiles[i], false));
@@ -1942,20 +1942,20 @@ function clearTiles(tiles, images) {
             // console.log("temp flag normal")
             animateCrush(images[i]);
             window.setTimeout(function() {
-                console.log("images b" + i + ": " + images[i].src);
-                console.log("tile type b" + i + ": " + tiles[i].type);
-                console.log("variant type b" + i + ": " + tiles[i].variant);
+                // console.log("images b" + i + ": " + images[i].src);
+                // console.log("tile type b" + i + ": " + tiles[i].type);
+                // console.log("variant type b" + i + ": " + tiles[i].variant);
                 images[i].src = blankTile.sprite;
                 tiles[i].type = blankTile.type;
                 tiles[i].variant = blankTile.variant;
-                console.log("images a" + i + ": " + images[i].src);
-                console.log("tile type a" + i + ": " + tiles[i].type);
-                console.log("variant type a" + i + ": " + tiles[i].variant);
+                // console.log("images a" + i + ": " + images[i].src);
+                // console.log("tile type a" + i + ": " + tiles[i].type);
+                // console.log("variant type a" + i + ": " + tiles[i].variant);
                 reverseCrush(images[i]);
                 populate();
-                console.log("images a" + i + ": " + images[i].src);
-                console.log("tile type a" + i + ": " + tiles[i].type);
-                console.log("variant type a" + i + ": " + tiles[i].variant);
+                // console.log("images a" + i + ": " + images[i].src);
+                // console.log("tile type a" + i + ": " + tiles[i].type);
+                // console.log("variant type a" + i + ": " + tiles[i].variant);
         }, animationTime)
         }
     }
@@ -1971,8 +1971,8 @@ function clearTilesSpecial(tiles, images, specialCandy) {
     let selectedTile = internalBoard[r][c];
     let found = false;
 
-    console.log("swap coords: " + r + ", " + c);
-    console.log("special candy: " + specialCandy.type + ", " + specialCandy.variant);
+    // console.log("swap coords: " + r + ", " + c);
+    // console.log("special candy: " + specialCandy.type + ", " + specialCandy.variant);
     
     // is coords player made?
     for (let i = 0; i < tiles.length; i++) {
@@ -1980,15 +1980,15 @@ function clearTilesSpecial(tiles, images, specialCandy) {
             found = true;
         }
     }
-    console.log("player made? " + found);
+    // console.log("player made? " + found);
 
     // if it's not player made
     if (!found) {
         // selects a random tile in the match array to put the special candy there
         selectedTile = randomize(tiles);
-        console.log("random coords: (" + selectedTile.row + ", " + selectedTile.column + ")");
+        // console.log("random coords: (" + selectedTile.row + ", " + selectedTile.column + ")");
     }
-    console.log("selected tile coords: (" + selectedTile.row + ", " + selectedTile.column + ")");
+    // console.log("selected tile coords: (" + selectedTile.row + ", " + selectedTile.column + ")");
 
     // clearImagesSpecial(images, specialCandy, selectedTile);
 
@@ -2002,13 +2002,13 @@ function clearTilesSpecial(tiles, images, specialCandy) {
         
         // normal tiles
         
-        console.log("blank tile");
+        // console.log("blank tile");
         tiles[i].type = "temp";
-        console.log("temp flag special")
+        // console.log("temp flag special")
         animateCrush(images[i]);
         window.setTimeout(function() {
             if (selectedTile == tiles[i]) {
-                console.log("TRIGGERED SPECIAL TILE");
+                // console.log("TRIGGERED SPECIAL TILE");
                 board[selectedTile.row][selectedTile.column].src = specialCandy.sprite;
                 selectedTile.type = specialCandy.type;
                 selectedTile.variant = specialCandy.variant;
@@ -2086,11 +2086,11 @@ function checkValid(currTile, otherTile) {
 }
 
 function populate() {
-    console.log("notPopulated before: " + notPopulated);
+    // console.log("notPopulated before: " + notPopulated);
     checkBlank();
-    console.log("notPopulated after: " + notPopulated);
+    // console.log("notPopulated after: " + notPopulated);
     while (notPopulated) {
-        console.log("a");
+        // console.log("a");
         dropCandy();
         generateCandy();
         checkBlank();
@@ -2138,14 +2138,14 @@ function dropCandy() {
                     // console.log("type: " + selectedTile.type);
                     // console.log("type: " + selectedTile.variant);
                     // console.log("condition value: " + selectedImage.src.search(selectedTile.type));
-                    if (selectedTile.type != "temp" && selectedImage.src.search(selectedTile.type) == -1) {
+                    /*if (selectedTile.type != "temp" && selectedImage.src.search(selectedTile.type) == -1) {
                         console.log("DROP CANDY ERROR");
                         console.log("candy: " + board[r][c].src);
                         console.log("dropped from (" + r + ", " + c + ")");
                         console.log("to (" + i + ", " + c + ")");
                         console.log("swap type: " + internalBoard[r][c].type);
                         console.log("swap variant: " + internalBoard[r][c].variant);
-                    }
+                    }*/
                 }
                 // change the bottom to be one candy above
                 i -= 1;
@@ -2182,7 +2182,7 @@ function generateCandy() {
                     break;
                 }
             }
-            if (candies[matchCandyIndex].type != newCandy.type ||
+            /*if (candies[matchCandyIndex].type != newCandy.type ||
                 candies[matchCandyIndex].variant != newCandy.variant ||
                 candies[matchCandyIndex].sprite != newCandy.sprite) {
                 console.log("GENERATE CANDY ERROR!!");
@@ -2190,7 +2190,7 @@ function generateCandy() {
                 console.log(newCandy.sprite);
                 console.log(newCandy.type);
                 console.log(newCandy.variant);
-            }
+            }*/
             board[0][c].src = newCandy.sprite;
             internalBoard[0][c].type = newCandy.type;
             internalBoard[0][c].variant = newCandy.variant;
