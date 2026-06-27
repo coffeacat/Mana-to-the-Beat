@@ -2312,7 +2312,7 @@ function closeMenu() {
     menuOverlay.style.width = "0%";
 }
 
-infoButton.addEventListener("click", openInfo);
+/*infoButton.addEventListener("click", openInfo);
 let infoVisable = false;
 
 // opens the info card
@@ -2328,7 +2328,7 @@ function openInfo() {
 function closeInfo() {
     infoVisable = false;
     infoOverlay.style.width = "0%";
-}
+}*/
 
 function bgmVolume() {
     volumeControl(bgmSlider, bgmBar, bgmValue, bgmSpeaker);
